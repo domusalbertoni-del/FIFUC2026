@@ -93,7 +93,7 @@ export default function Navbar() {
               }`}
             >
               <Ticket className="w-4 h-4" />
-              Compra tu Entrada
+              Adquiere tu Entrada
             </a>
           </div>
 
@@ -142,7 +142,7 @@ export default function Navbar() {
                   }`}
                 >
                   <Ticket className="w-4 h-4" />
-                  Compra tu Entrada
+                  Adquiere tu Entrada
                 </a>
                 <button
                   type="button"

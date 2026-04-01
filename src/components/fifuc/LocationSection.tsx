@@ -105,7 +105,7 @@ export default function LocationSection() {
               }`}
             >
               <Ticket className="w-4 h-4" />
-              Compra tu Entrada
+              Adquiere tu Entrada
             </a>
           </motion.div>
         </div>

@@ -38,7 +38,7 @@ export default function StickyTicketBar() {
               }`}
             >
               <Ticket className="w-4 h-4" />
-              Compra tu Entrada — 8-9 Julio
+              Adquiere tu Entrada — 8-9 Julio
             </a>
           </div>
         </motion.div>

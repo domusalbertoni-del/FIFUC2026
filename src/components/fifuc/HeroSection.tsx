@@ -97,7 +97,7 @@ export default function HeroSection() {
             className="group flex items-center gap-3 bg-white text-fifuc-navy px-10 py-4 rounded-full font-display font-bold text-lg md:text-xl shadow-2xl shadow-black/30 hover:shadow-fifuc-cyan/20 transition-shadow duration-300"
           >
             <Ticket className="w-5 h-5 transition-transform group-hover:-rotate-12" />
-            Compra tu Entrada
+            Adquiere tu Entrada
           </motion.a>
           <p className="text-white/40 text-xs font-medium tracking-wide">
             CUPOS LIMITADOS — ENTRADA PRESENCIAL
