@@ -10,9 +10,9 @@ interface StatItem {
 
 const stats: StatItem[] = [
   { value: 1000, suffix: "+", label: "Asistentes presenciales" },
-  { value: 600000, suffix: "+", label: "Visualizaciones streaming" },
-  { value: 120, suffix: "+", label: "Startups y emprendimientos" },
-  { value: 85, suffix: "%", label: "Estableció nuevos contactos profesionales" },
+  { value: 800000, suffix: "+", label: "Visualizaciones por Emol TV" },
+  { value: 100, suffix: "+", label: "Startups y emprendimientos" },
+  { value: 85, suffix: "%", label: "Generó nuevos contactos" },
 ];
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
