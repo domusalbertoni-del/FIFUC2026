@@ -28,7 +28,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center flex flex-col items-center gap-5">
         {/* Full UC + FIFUC combined logo — centered and prominent */}
         <motion.img
-          src="/images/logo-color.png"
+          src="/images/logo-uc-white.png"
           alt="UC — Festival de Innovación y Futuro 2026"
           className="w-[280px] sm:w-[380px] md:w-[480px] lg:w-[560px] h-auto mb-2"
           initial={{ opacity: 0, y: 30 }}
