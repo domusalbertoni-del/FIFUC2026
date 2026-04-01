@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Clock } from "lucide-react";
 import { expo } from "@/lib/utils";
+import { useTheme } from "@/lib/ThemeContext";
 
 interface TimeSlot {
   time: string;
@@ -79,9 +80,10 @@ const day2: TimeSlot[] = [
 export default function ProgramSection() {
   const [activeDay, setActiveDay] = useState<1 | 2>(1);
   const schedule = activeDay === 1 ? day1 : day2;
+  const { isLight } = useTheme();
 
   return (
-    <section id="programa" className="py-24 md:py-32 bg-fifuc-navy">
+    <section id="programa" className={`py-24 md:py-32 ${isLight ? "bg-white" : "bg-fifuc-navy"}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -91,11 +93,11 @@ export default function ProgramSection() {
           transition={{ duration: 0.8, ease: expo }}
           className="text-center mb-12"
         >
-          <p className="text-fifuc-cyan font-medium text-sm tracking-wider uppercase mb-4">
+          <p className={`font-medium text-sm tracking-wider uppercase mb-4 ${isLight ? "text-fifuc-blue" : "text-fifuc-cyan"}`}>
             Programa
           </p>
           <h2
-            className="font-display font-bold text-fifuc-white"
+            className={`font-display font-bold ${isLight ? "text-gray-900" : "text-fifuc-white"}`}
             style={{ fontSize: "var(--text-fluid-3xl)" }}
           >
             Agenda del <span className="text-gradient-brand">Festival</span>
@@ -111,7 +113,9 @@ export default function ProgramSection() {
               className={`px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all duration-300 ${
                 activeDay === day
                   ? "bg-gradient-brand text-fifuc-navy shadow-lg shadow-fifuc-cyan/20"
-                  : "border border-fifuc-white/20 text-fifuc-white/60 hover:border-fifuc-cyan/40 hover:text-fifuc-white"
+                  : isLight
+                    ? "border border-gray-200 text-gray-500 hover:border-fifuc-blue/30 hover:text-gray-700"
+                    : "border border-fifuc-white/20 text-fifuc-white/60 hover:border-fifuc-cyan/40 hover:text-fifuc-white"
               }`}
             >
               Día {day} — {day === 1 ? "8 Julio" : "9 Julio"}
@@ -130,7 +134,7 @@ export default function ProgramSection() {
             className="relative"
           >
             {/* Timeline line */}
-            <div className="absolute left-[18px] top-0 bottom-0 w-px bg-fifuc-cyan/20 md:left-[22px]" />
+            <div className={`absolute left-[18px] top-0 bottom-0 w-px md:left-[22px] ${isLight ? "bg-fifuc-blue/15" : "bg-fifuc-cyan/20"}`} />
 
             <div className="flex flex-col gap-6">
               {schedule.map((slot, i) => (
@@ -142,25 +146,29 @@ export default function ProgramSection() {
                   className="relative pl-12 md:pl-14"
                 >
                   {/* Dot */}
-                  <div className="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-fifuc-cyan shadow-md shadow-fifuc-cyan/40 md:left-3.5 md:w-3.5 md:h-3.5" />
+                  <div className={`absolute left-2.5 top-1.5 w-3 h-3 rounded-full shadow-md md:left-3.5 md:w-3.5 md:h-3.5 ${isLight ? "bg-fifuc-blue shadow-fifuc-blue/20" : "bg-fifuc-cyan shadow-fifuc-cyan/40"}`} />
 
-                  <div className="glass rounded-xl p-5 hover:border-fifuc-cyan/30 transition-colors duration-300">
+                  <div className={`rounded-xl p-5 transition-colors duration-300 ${
+                    isLight
+                      ? "bg-gray-50 border border-gray-100 hover:border-fifuc-blue/20"
+                      : "glass hover:border-fifuc-cyan/30"
+                  }`}>
                     <div className="flex items-center gap-2 mb-2">
-                      <Clock className="w-4 h-4 text-fifuc-cyan" />
-                      <span className="text-fifuc-cyan font-display font-semibold text-sm">
+                      <Clock className={`w-4 h-4 ${isLight ? "text-fifuc-blue" : "text-fifuc-cyan"}`} />
+                      <span className={`font-display font-semibold text-sm ${isLight ? "text-fifuc-blue" : "text-fifuc-cyan"}`}>
                         {slot.time}
                       </span>
                     </div>
                     <h3
-                      className="font-display font-semibold text-fifuc-white mb-1"
+                      className={`font-display font-semibold mb-1 ${isLight ? "text-gray-900" : "text-fifuc-white"}`}
                       style={{ fontSize: "var(--text-fluid-lg)" }}
                     >
                       {slot.title}
                     </h3>
-                    <p className="text-fifuc-yellow/80 text-sm font-medium mb-2">
+                    <p className={`text-sm font-medium mb-2 ${isLight ? "text-amber-600" : "text-fifuc-yellow/80"}`}>
                       {slot.speaker}
                     </p>
-                    <p className="text-fifuc-white/50 text-sm leading-relaxed">
+                    <p className={`text-sm leading-relaxed ${isLight ? "text-gray-500" : "text-fifuc-white/50"}`}>
                       {slot.description}
                     </p>
                   </div>

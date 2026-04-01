@@ -102,3 +102,23 @@ body {
   background: rgba(0, 212, 255, 0.3);
   color: var(--color-fifuc-white);
 }
+
+/* ─── Light mode overrides ─── */
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .glass-strong {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(0, 51, 160, 0.2);
+  color: #111827;
+}
