@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Ticket, Check } from "lucide-react";
+import { Ticket, Check, Calendar } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { expo } from "@/lib/utils";
 import { useTheme } from "@/lib/ThemeContext";
@@ -58,11 +58,11 @@ const INTERESES = [
   "Difusión y visibilidad",
 ];
 
-const DIAS_EVENTO = [
-  { value: "dia1", label: "Día 1 — 8 julio" },
-  { value: "dia2", label: "Día 2 — 9 julio" },
-  { value: "ambos", label: "Ambos días" },
-];
+const GCAL_BASE = "https://calendar.google.com/calendar/render?action=TEMPLATE";
+const GCAL_LOCATION = encodeURIComponent("Centro de Extensión UC Alameda, Av. Libertador Bernardo O'Higgins 390, Santiago, Chile");
+const GCAL_DETAILS = encodeURIComponent("8vo Festival de Innovación y Futuro UC\nMás info: fifuc.cl");
+const GCAL_DAY1 = `${GCAL_BASE}&text=${encodeURIComponent("FIFUC 2026 – Día 1")}&dates=20260708T083000/20260708T180000&location=${GCAL_LOCATION}&details=${GCAL_DETAILS}&ctz=America/Santiago`;
+const GCAL_DAY2 = `${GCAL_BASE}&text=${encodeURIComponent("FIFUC 2026 – Día 2")}&dates=20260709T083000/20260709T180000&location=${GCAL_LOCATION}&details=${GCAL_DETAILS}&ctz=America/Santiago`;
 
 /* ─── Types ─── */
 
@@ -95,7 +95,7 @@ const initialForm: FormData = {
   cargo: "",
   tipoCargo: "",
   industria: "",
-  diasEvento: "",
+  diasEvento: "ambos",
   rolEvento: "",
   intereses: [],
   esAuspiciador: false,
@@ -122,7 +122,6 @@ function validate(data: FormData): FormErrors {
   if (!data.cargo.trim()) err.cargo = "Ingresa tu cargo";
   if (!data.tipoCargo) err.tipoCargo = "Selecciona tipo de cargo";
   if (!data.industria) err.industria = "Selecciona una industria";
-  if (!data.diasEvento) err.diasEvento = "Selecciona qué día(s) asistirás";
   if (!data.rolEvento) err.rolEvento = "Selecciona tu rol";
   if (data.intereses.length === 0) err.intereses = "Selecciona al menos un interés";
   return err;
@@ -278,25 +277,6 @@ export default function RegistrationSection() {
                 </p>
               </div>
 
-              {/* Day selection */}
-              <div className="grid grid-cols-3 gap-2 mb-6">
-                {DIAS_EVENTO.map((dia) => (
-                  <button
-                    key={dia.value}
-                    type="button"
-                    onClick={() => updateField("diasEvento", dia.value)}
-                    className={`py-3 rounded-lg text-xs font-bold tracking-wide transition-all duration-200 border cursor-pointer ${
-                      form.diasEvento === dia.value ? t.dayActive : t.dayInactive
-                    }`}
-                  >
-                    {dia.label}
-                  </button>
-                ))}
-              </div>
-              {errors.diasEvento && (
-                <p className={`${t.err} -mt-4 mb-4`}>{errors.diasEvento}</p>
-              )}
-
               {/* Fields */}
               <div className="space-y-3">
                 {/* Name row */}
@@ -392,7 +372,7 @@ export default function RegistrationSection() {
                   <label className="flex items-center gap-2.5 cursor-pointer group">
                     <input type="checkbox" checked={form.autorizaWhatsapp} onChange={(e) => updateField("autorizaWhatsapp", e.target.checked)} className={`w-3.5 h-3.5 rounded cursor-pointer ${t.checkbox}`} />
                     <span className={`text-xs transition-colors ${t.checkboxText}`}>
-                      Autorizo recibir info del evento por WhatsApp
+                      Autorizo recibir información del evento por WhatsApp
                     </span>
                   </label>
                 </div>
@@ -467,11 +447,38 @@ export default function RegistrationSection() {
                 <Row label="Nombre" value={`${form.nombre} ${form.apellido}`} t={t} />
                 <Row label="Correo" value={form.correo} t={t} />
                 <Row label="Organización" value={form.organizacion} t={t} />
-                <Row label="Día(s)" value={DIAS_EVENTO.find((d) => d.value === form.diasEvento)?.label ?? ""} t={t} />
+                <Row label="Día(s)" value="8 – 9 julio 2026" t={t} />
               </div>
 
-              <a href="mailto:fifuc@uc.cl" className={`inline-block mt-6 text-xs transition-colors underline underline-offset-4 ${t.link}`}>
-                ¿Problemas? fifuc@uc.cl
+              <p className={`text-xs mt-4 ${t.successText}`}>
+                Tu ticket sirve para ambos días
+              </p>
+
+              {/* Google Calendar buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mt-5">
+                <a
+                  href={GCAL_DAY1}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 border ${t.dayActive}`}
+                >
+                  <Calendar className="w-3.5 h-3.5" />
+                  Día 1 — 8 julio
+                </a>
+                <a
+                  href={GCAL_DAY2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 border ${t.dayActive}`}
+                >
+                  <Calendar className="w-3.5 h-3.5" />
+                  Día 2 — 9 julio
+                </a>
+              </div>
+              <p className={`text-[11px] mt-1.5 ${t.note}`}>Agregar a Google Calendar</p>
+
+              <a href="https://fifuc.cl" target="_blank" rel="noopener noreferrer" className={`inline-block mt-6 text-xs transition-colors underline underline-offset-4 ${t.link}`}>
+                ¿Problemas? fifuc.cl
               </a>
             </motion.div>
           )}
