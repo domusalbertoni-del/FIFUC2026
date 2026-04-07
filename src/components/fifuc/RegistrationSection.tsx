@@ -59,8 +59,8 @@ const INTERESES = [
 ];
 
 const DIAS_EVENTO = [
-  { value: "dia1", label: "Día 1 — 8 julio" },
-  { value: "dia2", label: "Día 2 — 9 julio" },
+  { value: "dia1", label: "Día 1: 8 julio" },
+  { value: "dia2", label: "Día 2: 9 julio" },
   { value: "ambos", label: "Ambos días" },
 ];
 
@@ -489,7 +489,7 @@ export default function RegistrationSection() {
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 border ${t.dayActive}`}
                 >
                   <Calendar className="w-3.5 h-3.5" />
-                  Día 1 — 8 julio
+                  Día 1: 8 julio
                 </a>
                 <a
                   href={GCAL_DAY2}
@@ -498,7 +498,7 @@ export default function RegistrationSection() {
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 border ${t.dayActive}`}
                 >
                   <Calendar className="w-3.5 h-3.5" />
-                  Día 2 — 9 julio
+                  Día 2: 9 julio
                 </a>
               </div>
               <p className={`text-[11px] mt-1.5 ${t.note}`}>Agregar a Google Calendar</p>
