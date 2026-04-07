@@ -2,7 +2,7 @@ import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
 import Navbar from "@/components/fifuc/Navbar";
 import HeroSection from "@/components/fifuc/HeroSection";
 import RegistrationSection from "@/components/fifuc/RegistrationSection";
-import Footer from "@/components/fifuc/Footer";
+
 import StickyTicketBar from "@/components/fifuc/StickyTicketBar";
 
 function AppContent() {
@@ -13,7 +13,6 @@ function AppContent() {
       <StickyTicketBar />
       <HeroSection />
       <RegistrationSection />
-      <Footer />
     </div>
   );
 }
