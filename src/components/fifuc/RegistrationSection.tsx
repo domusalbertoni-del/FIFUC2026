@@ -58,6 +58,12 @@ const INTERESES = [
   "Difusión y visibilidad",
 ];
 
+const DIAS_EVENTO = [
+  { value: "dia1", label: "Día 1 — 8 julio" },
+  { value: "dia2", label: "Día 2 — 9 julio" },
+  { value: "ambos", label: "Ambos días" },
+];
+
 const GCAL_BASE = "https://calendar.google.com/calendar/render?action=TEMPLATE";
 const GCAL_LOCATION = encodeURIComponent("Centro de Extensión UC Alameda, Av. Libertador Bernardo O'Higgins 390, Santiago, Chile");
 const GCAL_DETAILS = encodeURIComponent("8vo Festival de Innovación y Futuro UC\nMás info: fifuc.cl");
@@ -95,7 +101,7 @@ const initialForm: FormData = {
   cargo: "",
   tipoCargo: "",
   industria: "",
-  diasEvento: "ambos",
+  diasEvento: "",
   rolEvento: "",
   intereses: [],
   esAuspiciador: false,
@@ -122,6 +128,7 @@ function validate(data: FormData): FormErrors {
   if (!data.cargo.trim()) err.cargo = "Ingresa tu cargo";
   if (!data.tipoCargo) err.tipoCargo = "Selecciona tipo de cargo";
   if (!data.industria) err.industria = "Selecciona una industria";
+  if (!data.diasEvento) err.diasEvento = "Selecciona qué día(s) asistirás";
   if (!data.rolEvento) err.rolEvento = "Selecciona tu rol";
   if (data.intereses.length === 0) err.intereses = "Selecciona al menos un interés";
   return err;
@@ -276,6 +283,25 @@ export default function RegistrationSection() {
                   Completa tus datos para la 8va edición del FIFUC.
                 </p>
               </div>
+
+              {/* Day selection */}
+              <div className="grid grid-cols-3 gap-2 mb-6">
+                {DIAS_EVENTO.map((dia) => (
+                  <button
+                    key={dia.value}
+                    type="button"
+                    onClick={() => updateField("diasEvento", dia.value)}
+                    className={`py-3 rounded-lg text-xs font-bold tracking-wide transition-all duration-200 border cursor-pointer ${
+                      form.diasEvento === dia.value ? t.dayActive : t.dayInactive
+                    }`}
+                  >
+                    {dia.label}
+                  </button>
+                ))}
+              </div>
+              {errors.diasEvento && (
+                <p className={`${t.err} -mt-4 mb-4`}>{errors.diasEvento}</p>
+              )}
 
               {/* Fields */}
               <div className="space-y-3">
@@ -447,7 +473,7 @@ export default function RegistrationSection() {
                 <Row label="Nombre" value={`${form.nombre} ${form.apellido}`} t={t} />
                 <Row label="Correo" value={form.correo} t={t} />
                 <Row label="Organización" value={form.organizacion} t={t} />
-                <Row label="Día(s)" value="8 – 9 julio 2026" t={t} />
+                <Row label="Día(s)" value={DIAS_EVENTO.find((d) => d.value === form.diasEvento)?.label ?? ""} t={t} />
               </div>
 
               <p className={`text-xs mt-4 ${t.successText}`}>
