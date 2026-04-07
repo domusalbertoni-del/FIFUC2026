@@ -6,11 +6,7 @@ import { useTheme } from "@/lib/ThemeContext";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
-  { label: "Programa", href: "#programa" },
-  { label: "Speakers", href: "#speakers" },
-  { label: "Startups", href: "#startups" },
-  { label: "Sede", href: "#sede" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Registro", href: "#registro" },
 ];
 
 export default function Navbar() {

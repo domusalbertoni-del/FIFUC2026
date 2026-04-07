@@ -2,7 +2,6 @@ import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
 import Navbar from "@/components/fifuc/Navbar";
 import HeroSection from "@/components/fifuc/HeroSection";
 import RegistrationSection from "@/components/fifuc/RegistrationSection";
-
 import StickyTicketBar from "@/components/fifuc/StickyTicketBar";
 
 function AppContent() {
