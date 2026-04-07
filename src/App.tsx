@@ -1,14 +1,11 @@
-import { ThemeProvider, useTheme } from "@/lib/ThemeContext";
-import Navbar from "@/components/fifuc/Navbar";
+import { ThemeProvider } from "@/lib/ThemeContext";
 import HeroSection from "@/components/fifuc/HeroSection";
 import RegistrationSection from "@/components/fifuc/RegistrationSection";
 import StickyTicketBar from "@/components/fifuc/StickyTicketBar";
 
 function AppContent() {
-  const { isLight } = useTheme();
   return (
-    <div data-theme={isLight ? "light" : "dark"}>
-      <Navbar />
+    <div data-theme="light">
       <StickyTicketBar />
       <HeroSection />
       <RegistrationSection />
